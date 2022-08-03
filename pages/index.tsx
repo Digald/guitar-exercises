@@ -1,9 +1,14 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import { Factory, EasyScore, System } from 'vexflow';
+import { useState } from "react";
+import type { NextPage } from "next";
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import { Factory, EasyScore, System } from "vexflow";
+import KeySelect from "../components/KeySelect";
+import ScaleType from "../components/ScaleType";
 
 const Home: NextPage = () => {
+  const [scaleType, setScaleType] = useState('major');
+  const [key, setKey] = useState('f');
   return (
     <div className={styles.container}>
       <Head>
@@ -13,10 +18,10 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        {/* Choose key here */}
-
         {/* Choose type of scale here */}
-
+        <ScaleType setScaleType={setScaleType} />
+        {/* Choose key here */}
+        <KeySelect setKey={setKey} />
         {/* Render scale here */}
       </main>
 
@@ -30,7 +35,7 @@ const Home: NextPage = () => {
         </a>
       </footer>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
