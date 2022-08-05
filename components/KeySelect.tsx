@@ -6,7 +6,7 @@ type Inputs = {
   key: string;
 };
 
-const KEYS = ["f", "g", "a", "a", "b♭", "c", "c♯", "d", "e♭", "e"];
+const KEYS = ["f", "g", "a", "b♭", "c", "c♯", "d", "e♭", "e"];
 
 function KeySelect({ setKey }: Props) {
   const {
