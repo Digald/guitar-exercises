@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 type Props = {
   scaleKey: string;
@@ -6,9 +6,24 @@ type Props = {
 };
 
 const Scale = ({ scaleKey, scaleType }: Props) => {
+  const [vextab, setVextab] = useState(null);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (!window?.vextab) {
+        console.log("log not hit");
+        return null;
+      }
+      setVextab(window?.vextab);
+      clearInterval(intervalId);
+    }, 100);
+  }, []);
+
   useEffect(() => {
     console.log("log scaleKey", scaleKey);
     console.log("log scaleType", scaleType);
+
+    // Create data string based on key and scale
     const data = `
   tabstave notation=true key=A time=4/4
 
@@ -17,18 +32,26 @@ const Scale = ({ scaleKey, scaleType }: Props) => {
   text :w, |#segno, ,|, :hd, , #tr
 `;
 
-    // console.log(window.location.search = `tab=${data.replaceAll(' ', 'X')}`);
-  }, [scaleKey, scaleType]);
+    if (vextab) {
+      const VF = vextab?.Vex?.Flow;
+      const renderer = new VF.Renderer(
+        document.getElementById("boo"),
+        VF.Renderer.Backends.SVG
+      );
+
+      // Initialize VexTab artist and parser.
+      const artist = new vextab.Artist(10, 10, 750, { scale: 0.8 });
+      const tab = new vextab.VexTab(artist);
+
+      tab.parse(data);
+      artist.render(renderer);
+    }
+  }, [scaleKey, scaleType, vextab]);
+
   return (
-    <iframe
-      key={`${scaleKey}-${scaleType}`}
-      id="output"
-      width="100%"
-      height="300"
-      src="//jsfiddle.net/Digald/vmqnj4u6/40/embedded/result/"
-      allowFullScreen={true}
-      frameBorder="0"
-    ></iframe>
+    <div className="vexbox">
+      <div id="boo"></div>
+    </div>
   );
 };
 
