@@ -9,7 +9,7 @@ import Script from "next/script";
 
 const Home: NextPage = () => {
   const [scaleType, setScaleType] = useState("major");
-  const [key, setKey] = useState("f");
+  const [key, setKey] = useState("F");
   return (
     <div className={styles.container}>
       <Script src="https://unpkg.com/vextab@3.0.6/releases/main.dev.js"></Script>
@@ -20,11 +20,8 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        {/* Choose type of scale here */}
         <ScaleType setScaleType={setScaleType} />
-        {/* Choose key here */}
-        <KeySelect setKey={setKey} />
-        {/* Render scale here */}
+        <KeySelect setKey={setKey} scaleType={scaleType} />
         <Scale scaleKey={key} scaleType={scaleType} />
       </main>
 

@@ -1,14 +1,44 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import ScaleType from "./ScaleType";
 
-type Props = { setKey: (value: string) => void };
+type Props = { setKey: (value: string) => void; scaleType: string };
 type Inputs = {
   key: string;
 };
 
-const KEYS = ["f", "g", "a", "b♭", "c", "c♯", "d", "e♭", "e"];
+const MAJOR_KEYS = [
+  "F",
+  "F#",
+  "Gb",
+  "G",
+  "Ab",
+  "A",
+  "Bb",
+  "B",
+  "Cb",
+  "C",
+  "Db",
+  "D",
+  "Eb",
+  "E",
+];
+const PENTATONIC_KEYS = [
+  "F",
+  "F#",
+  "G",
+  "Ab",
+  "A",
+  "Bb",
+  "B",
+  "C",
+  "C#",
+  "D",
+  "Eb",
+  "E",
+];
 
-function KeySelect({ setKey }: Props) {
+function KeySelect({ setKey, scaleType }: Props) {
   const {
     register,
     handleSubmit,
@@ -19,14 +49,21 @@ function KeySelect({ setKey }: Props) {
     setKey(data?.key);
   };
 
+  let keys: string[] = [];
+  if (scaleType === "major") {
+    keys = MAJOR_KEYS;
+  } else if (scaleType === "minor-pentatonic") {
+    keys = PENTATONIC_KEYS;
+  }
+
   return (
     <form onChange={handleSubmit(onSubmit)}>
       <label>Key</label>
       <select {...register("key")}>
-        {KEYS.map((key: string) => {
+        {keys.map((key: string) => {
           return (
             <option key={key} value={key}>
-              {key.toUpperCase()}
+              {key}
             </option>
           );
         })}

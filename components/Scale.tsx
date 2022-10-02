@@ -1,5 +1,17 @@
 import React, { useEffect, useState } from "react";
 
+type Vextab = {
+  VexTab: any;
+  Artist: any;
+  Vex: any;
+};
+
+declare global {
+  interface Window {
+    vextab: any;
+  }
+}
+
 type Props = {
   scaleKey: string;
   scaleType: string;
@@ -22,10 +34,12 @@ const Scale = ({ scaleKey, scaleType }: Props) => {
   useEffect(() => {
     console.log("log scaleKey", scaleKey);
     console.log("log scaleType", scaleType);
+    const elementId = document.getElementById("boo");
+    if (elementId) elementId.innerHTML = "";
 
     // Create data string based on key and scale
     const data = `
-  tabstave notation=true key=A time=4/4
+  tabstave notation=true key=${scaleKey} time=18/8
 
   notes :q =|: (5/2.5/3.7/4) :8 7-5h6/3 ^3^ 5h6-7/5 ^3^ :q 7V/4 |
   notes :8 t12p7/4 s5s3/4 :8 3s:16:5-7/5 :q p5/4
