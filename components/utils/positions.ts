@@ -158,19 +158,19 @@ export const keyMaps = {
     },
     {
       position: 4,
-      startingFret: 5,
+      startingFret: 6,
     },
     {
       position: 5,
-      startingFret: 5,
+      startingFret: 8,
     },
     {
       position: 6,
-      startingFret: 5,
+      startingFret: 10,
     },
     {
       position: 7,
-      startingFret: 5,
+      startingFret: 12,
     },
   ],
   "F#": [
