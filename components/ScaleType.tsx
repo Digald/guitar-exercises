@@ -1,19 +1,14 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-type Props = { setScaleType: (value: string) => void };
-type Inputs = {
-  scaleType: string;
-};
-
-function ScaleType({ setScaleType }: Props) {
+function ScaleType({ setScaleType }: ScaleTypeProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<ScaleTypeInputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<ScaleTypeInputs> = (data) => {
     setScaleType(data?.scaleType);
   };
 

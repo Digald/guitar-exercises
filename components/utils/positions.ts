@@ -443,4 +443,154 @@ export const keyMaps = {
       startingFret: 12,
     },
   ],
+  "C#": [
+    {
+      position: 3,
+      startingFret: 1,
+    },
+    {
+      position: 4,
+      startingFret: 2,
+    },
+    {
+      position: 5,
+      startingFret: 4,
+    },
+    {
+      position: 6,
+      startingFret: 6,
+    },
+    {
+      position: 7,
+      startingFret: 8,
+    },
+    {
+      position: 1,
+      startingFret: 9,
+    },
+    {
+      position: 2,
+      startingFret: 11,
+    },
+  ],
+  Db: [
+    {
+      position: 3,
+      startingFret: 1,
+    },
+    {
+      position: 4,
+      startingFret: 2,
+    },
+    {
+      position: 5,
+      startingFret: 4,
+    },
+    {
+      position: 6,
+      startingFret: 6,
+    },
+    {
+      position: 7,
+      startingFret: 8,
+    },
+    {
+      position: 1,
+      startingFret: 9,
+    },
+    {
+      position: 2,
+      startingFret: 11,
+    },
+  ],
+  D: [
+    {
+      position: 3,
+      startingFret: 2,
+    },
+    {
+      position: 4,
+      startingFret: 3,
+    },
+    {
+      position: 5,
+      startingFret: 5,
+    },
+    {
+      position: 6,
+      startingFret: 7,
+    },
+    {
+      position: 7,
+      startingFret: 9,
+    },
+    {
+      position: 1,
+      startingFret: 10,
+    },
+    {
+      position: 2,
+      startingFret: 12,
+    },
+  ],
+  Eb: [
+    {
+      position: 2,
+      startingFret: 1,
+    },
+    {
+      position: 3,
+      startingFret: 3,
+    },
+    {
+      position: 4,
+      startingFret: 4,
+    },
+    {
+      position: 5,
+      startingFret: 6,
+    },
+    {
+      position: 6,
+      startingFret: 8,
+    },
+    {
+      position: 7,
+      startingFret: 10,
+    },
+    {
+      position: 1,
+      startingFret: 11,
+    },
+  ],
+  E: [
+    {
+      position: 2,
+      startingFret: 2,
+    },
+    {
+      position: 3,
+      startingFret: 4,
+    },
+    {
+      position: 4,
+      startingFret: 5,
+    },
+    {
+      position: 5,
+      startingFret: 7,
+    },
+    {
+      position: 6,
+      startingFret: 9,
+    },
+    {
+      position: 7,
+      startingFret: 11,
+    },
+    {
+      position: 1,
+      startingFret: 12,
+    },
+  ],
 };

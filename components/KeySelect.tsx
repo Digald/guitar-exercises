@@ -1,11 +1,5 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import ScaleType from "./ScaleType";
-
-type Props = { setKey: (value: string) => void; scaleType: string };
-type Inputs = {
-  key: string;
-};
 
 const MAJOR_KEYS = [
   "F",
@@ -18,6 +12,7 @@ const MAJOR_KEYS = [
   "B",
   "Cb",
   "C",
+  "C#",
   "Db",
   "D",
   "Eb",
@@ -38,14 +33,14 @@ const PENTATONIC_KEYS = [
   "E",
 ];
 
-function KeySelect({ setKey, scaleType }: Props) {
+function KeySelect({ setKey, scaleType }: KeySelectProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<KeySelectInputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<KeySelectInputs> = (data) => {
     setKey(data?.key);
   };
 
