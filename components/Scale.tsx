@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { positions, keyMaps } from "./utils/positions";
-import { ascending } from "./utils/exercises";
+import { ascOrDesc } from "./utils/exercises";
 
 declare global {
   interface Window {
@@ -26,14 +26,13 @@ const Scale = ({ scaleKey, scaleType }: ScaleProps) => {
     if (elementId) elementId.innerHTML = "";
 
     // Create data string based on key and scale
-    const data = ascending(scaleKey, keyMaps, positions);
-    //     const data = `
-    //   tabstave notation=true key=${scaleKey} time=18/8
-    //   notes :q =|: (5/2.5/3.7/4) :8 7-5h6/3 ^3^ 5h6-7/5 ^3^ :q 7V/4 |
-    //   notes :8 t12p7/4 s5s3/4 :8 3s:16:5-7/5 :q p5/4 |
-    //   notes :8 2/6 4/6 6/6 2/5 4/5 6/5 2/6 4/6 6/6 2/5 4/5 6/5 2/5 4/5 6/5 2/5 4/5 6/5 2/5 4/5 6/5
+    const data = ascOrDesc(scaleKey, keyMaps, positions, 'asc');
+    // const data = `
+    //     tabstave notation=true key=F time=18/8
+    //     notes :8 1/6 3/6 5/6 1/5 3/5 5/5 2/4 3/4 5/4 2/3 3/3 5/3 3/2 5/2 6/2 3/1 5/1 6/1 |
+    //     notes :8 3/6 5/6 6/6 3/5 5/5 7/5 3/4 5/4 7/4 3/3 5/3 7/3 5/2 6/2 8/2 5/1 6/1 8/1 |
     // `;
-    console.log(data);
+    // console.log(data);
 
     if (vextab) {
       const VF = vextab?.Vex?.Flow;
@@ -43,7 +42,9 @@ const Scale = ({ scaleKey, scaleType }: ScaleProps) => {
       );
 
       // Initialize VexTab artist and parser.
-      const artist = new vextab.Artist(10, 10, 750, { scale: 0.8 });
+      const artist = new vextab.Artist(10, 10, window?.innerWidth, {
+        scale: 1,
+      });
       const tab = new vextab.VexTab(artist);
 
       tab.parse(data);

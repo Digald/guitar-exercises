@@ -16,3 +16,9 @@ type ScaleTypeProps = { setScaleType: (value: string) => void };
 type ScaleTypeInputs = {
   scaleType: string;
 };
+
+enum exerciseType1 {
+  asc = 'asc',
+  desc = 'desc',
+  both = 'both'
+}
