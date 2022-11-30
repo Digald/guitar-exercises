@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { positions, keyMaps } from "./utils/positions";
-import { ascOrDesc } from "./utils/exercises";
+import { ascOrDesc, ascAndDesc } from "./utils/exercises";
 
 declare global {
   interface Window {
@@ -26,7 +26,7 @@ const Scale = ({ scaleKey, scaleType }: ScaleProps) => {
     if (elementId) elementId.innerHTML = "";
 
     // Create data string based on key and scale
-    const data = ascOrDesc(scaleKey, keyMaps, positions, 'asc');
+    const data = ascAndDesc(scaleKey, keyMaps, positions);
     // const data = `
     //     tabstave notation=true key=F time=18/8
     //     notes :8 1/6 3/6 5/6 1/5 3/5 5/5 2/4 3/4 5/4 2/3 3/3 5/3 3/2 5/2 6/2 3/1 5/1 6/1 |

@@ -20,5 +20,4 @@ type ScaleTypeInputs = {
 enum exerciseType1 {
   asc = 'asc',
   desc = 'desc',
-  both = 'both'
 }
