@@ -1,12 +1,11 @@
-import { keyMaps, positions } from "./positions";
+import { keyMaps } from "./positions";
+import { getNotesOfPosition } from "./getNotesOfPosition";
 
 type KeyMaps = typeof keyMaps;
-type Positions = typeof positions;
 
 export const ascOrDesc = (
   scaleKey: string,
   keyMaps: KeyMaps,
-  positions: Positions,
   type: exerciseType1
 ): string => {
   let data = ""; // holds full display of staffs
@@ -18,16 +17,7 @@ export const ascOrDesc = (
     let newStaffLine = `tabstave notation=true key=${scaleKey} time=18/8`;
 
     // calculate each note of each position in the scaleKey
-    const notesOfThisPosition = positions[
-      position.position as keyof typeof positions
-    ].map((note) => {
-      const splitNoteString = note.split("/");
-      const calculatedFret = (
-        Number(splitNoteString[0]) + position?.startingFret
-      ).toString();
-      splitNoteString[0] = calculatedFret;
-      return splitNoteString.join("/");
-    });
+    const notesOfThisPosition = getNotesOfPosition(position);
 
     // is asc, desc, or both
     if (type === "desc") {
@@ -60,7 +50,6 @@ export const ascOrDesc = (
 export const ascAndDesc = (
   scaleKey: string,
   keyMaps: KeyMaps,
-  positions: Positions
 ): string => {
   let data = ""; // holds full display of staffs
 
@@ -69,16 +58,7 @@ export const ascAndDesc = (
     let newStaffLine = `tabstave notation=true key=${scaleKey} time=18/8`;
 
     // calculate each note of each position in the scaleKey
-    const notesOfThisPosition = positions[
-      position.position as keyof typeof positions
-    ].map((note) => {
-      const splitNoteString = note.split("/");
-      const calculatedFret = (
-        Number(splitNoteString[0]) + position?.startingFret
-      ).toString();
-      splitNoteString[0] = calculatedFret;
-      return splitNoteString.join("/");
-    });
+    const notesOfThisPosition = getNotesOfPosition(position);
 
     const descNotesOfPosition = notesOfThisPosition?.slice()?.reverse();
 
@@ -105,7 +85,6 @@ export const ascAndDesc = (
 export const ascAndDescAlternating = (
   scaleKey: string,
   keyMaps: KeyMaps,
-  positions: Positions
 ): string => {
   let data = ""; // holds full display of staffs
   let fullStaffLine = ""; // holds all of the lines for a single staff
@@ -120,16 +99,7 @@ export const ascAndDescAlternating = (
     let newStaffLine = `tabstave notation=true key=${scaleKey} time=18/8`;
 
     // calculate each note of each position in the scaleKey
-    const notesOfThisPosition = positions[
-      position.position as keyof typeof positions
-    ].map((note) => {
-      const splitNoteString = note.split("/");
-      const calculatedFret = (
-        Number(splitNoteString[0]) + position?.startingFret
-      ).toString();
-      splitNoteString[0] = calculatedFret;
-      return splitNoteString.join("/");
-    });
+    const notesOfThisPosition = getNotesOfPosition(position);
 
     if (index < 7 && index % 2) {
       // If the position is below the first seven and is even
