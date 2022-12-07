@@ -131,3 +131,59 @@ export const ascAndDescAlternating = (
   });
   return data;
 };
+
+export const ascOrDescCoils = (
+  scaleKey: string,
+  keyMaps: KeyMaps,
+  type: exerciseType1
+): string => {
+  let data = ""; // holds full display of staffs
+  let fullStaffLine = ""; // holds all of the lines for a single staff
+  let tempSwitch = false; // controls when to display a new staff line
+
+  // map through each position in a key
+  keyMaps[scaleKey as keyof typeof keyMaps].forEach((position) => {
+    let newStaffLine = `tabstave notation=true key=${scaleKey} time=9/8`;
+
+    // calculate each note of each position in the scaleKey
+    const notesOfThisPosition = getNotesOfPosition(position);
+
+    // is asc, desc, or both
+    if (type === "desc") {
+      notesOfThisPosition.reverse();
+    }
+
+    let coilCount = 0;
+    for (let i = 0; i < 18; i++) {
+      coilCount++;
+      const note = notesOfThisPosition[i];
+
+      if (coilCount === 3) {
+        coilCount = 0;
+        i -= 2;
+      }
+      console.log('log note', note);
+    }
+    console.log('log ------------------------')
+    // Set up scale for each position
+    // let notesInMeasure = "\nnotes :8 ";
+    // notesOfThisPosition.map((note) => {
+    //   notesInMeasure += `${note} `;
+    // });
+    // notesInMeasure += "|";
+
+    // newStaffLine += notesInMeasure;
+
+    // if (!tempSwitch) {
+    //   fullStaffLine += newStaffLine;
+    //   tempSwitch = true;
+    //   return;
+    // }
+
+    // fullStaffLine += notesInMeasure;
+    // tempSwitch = false;
+    // data += `\n${fullStaffLine}`;
+    // fullStaffLine = "";
+  });
+  return data;
+};
