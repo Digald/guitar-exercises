@@ -47,10 +47,7 @@ export const ascOrDesc = (
   return data;
 };
 
-export const ascAndDesc = (
-  scaleKey: string,
-  keyMaps: KeyMaps,
-): string => {
+export const ascAndDesc = (scaleKey: string, keyMaps: KeyMaps): string => {
   let data = ""; // holds full display of staffs
 
   // map through each position in a key
@@ -84,7 +81,7 @@ export const ascAndDesc = (
 // TODO missing a repeat of the first position
 export const ascAndDescAlternating = (
   scaleKey: string,
-  keyMaps: KeyMaps,
+  keyMaps: KeyMaps
 ): string => {
   let data = ""; // holds full display of staffs
   let fullStaffLine = ""; // holds all of the lines for a single staff
@@ -139,7 +136,6 @@ export const ascOrDescCoils = (
 ): string => {
   let data = ""; // holds full display of staffs
   let fullStaffLine = ""; // holds all of the lines for a single staff
-  let tempSwitch = false; // controls when to display a new staff line
 
   // map through each position in a key
   keyMaps[scaleKey as keyof typeof keyMaps].forEach((position) => {
@@ -153,37 +149,25 @@ export const ascOrDescCoils = (
       notesOfThisPosition.reverse();
     }
 
+    let notesInMeasure = "\nnotes :8 ";
     let coilCount = 0;
     for (let i = 0; i < 18; i++) {
-      coilCount++;
       const note = notesOfThisPosition[i];
-
-      if (coilCount === 3) {
+      notesInMeasure += `${note} `;
+      // TODO clip 2 notes off end
+      if (coilCount === 2) {
         coilCount = 0;
         i -= 2;
+        continue;
       }
-      console.log('log note', note);
+
+      coilCount++;
     }
-    console.log('log ------------------------')
-    // Set up scale for each position
-    // let notesInMeasure = "\nnotes :8 ";
-    // notesOfThisPosition.map((note) => {
-    //   notesInMeasure += `${note} `;
-    // });
-    // notesInMeasure += "|";
 
-    // newStaffLine += notesInMeasure;
-
-    // if (!tempSwitch) {
-    //   fullStaffLine += newStaffLine;
-    //   tempSwitch = true;
-    //   return;
-    // }
-
-    // fullStaffLine += notesInMeasure;
-    // tempSwitch = false;
-    // data += `\n${fullStaffLine}`;
-    // fullStaffLine = "";
+    notesInMeasure += "|";
+    newStaffLine += notesInMeasure;
+    fullStaffLine += `\n${newStaffLine}`;
   });
+  data += `\n${fullStaffLine}`;
   return data;
 };
