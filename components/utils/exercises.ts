@@ -187,11 +187,9 @@ export const ascAndDescThreeNoteCoils = (
 
     // calculate each note of each position in the scaleKey
     const notesOfThisPosition = getNotesOfPosition(position);
-
-    // is asc, desc, or both
-    // if (type === "desc") {
-    //   notesOfThisPosition.reverse();
-    // }
+    const reversedNotesOfThisPosition = notesOfThisPosition
+      .slice(0, -1)
+      .reverse();
 
     let notesInMeasure = "\nnotes :8 ";
     let coilCount = 0; // Tracks when to coil
