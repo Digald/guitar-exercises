@@ -129,7 +129,7 @@ export const ascAndDescAlternating = (
   return data;
 };
 
-export const ascOrDescCoils = (
+export const ascOrDescThreeNoteCoils = (
   scaleKey: string,
   keyMaps: KeyMaps,
   type: exerciseType1
@@ -150,17 +150,63 @@ export const ascOrDescCoils = (
     }
 
     let notesInMeasure = "\nnotes :8 ";
-    let coilCount = 0;
+    let coilCount = 0; // Tracks when to coil
+    let noteCount = 0; // Tracks when to insert measure
     for (let i = 0; i < 18; i++) {
       const note = notesOfThisPosition[i];
-      notesInMeasure += `${note} `;
-      // TODO clip 2 notes off end
+      noteCount++;
+      notesInMeasure += `${note}${noteCount % 9 === 0 ? "|" : ""} `;
+
+      if (i === 17) break;
       if (coilCount === 2) {
         coilCount = 0;
         i -= 2;
         continue;
       }
+      coilCount++;
+    }
 
+    notesInMeasure += "|";
+    newStaffLine += notesInMeasure;
+    fullStaffLine += `\n${newStaffLine}`;
+  });
+  data += `\n${fullStaffLine}`;
+  return data;
+};
+
+export const ascAndDescThreeNoteCoils = (
+  scaleKey: string,
+  keyMaps: KeyMaps
+): string => {
+  let data = ""; // holds full display of staffs
+  let fullStaffLine = ""; // holds all of the lines for a single staff
+
+  // map through each position in a key
+  keyMaps[scaleKey as keyof typeof keyMaps].forEach((position) => {
+    let newStaffLine = `tabstave notation=true key=${scaleKey} time=9/8`;
+
+    // calculate each note of each position in the scaleKey
+    const notesOfThisPosition = getNotesOfPosition(position);
+
+    // is asc, desc, or both
+    // if (type === "desc") {
+    //   notesOfThisPosition.reverse();
+    // }
+
+    let notesInMeasure = "\nnotes :8 ";
+    let coilCount = 0; // Tracks when to coil
+    let noteCount = 0; // Tracks when to insert measure
+    for (let i = 0; i < 18; i++) {
+      const note = notesOfThisPosition[i];
+      noteCount++;
+      notesInMeasure += `${note}${noteCount % 9 === 0 ? "|" : ""} `;
+
+      if (i === 17) break;
+      if (coilCount === 2) {
+        coilCount = 0;
+        i -= 2;
+        continue;
+      }
       coilCount++;
     }
 
