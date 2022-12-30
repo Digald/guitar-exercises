@@ -1,5 +1,6 @@
 import { keyMaps } from "./positions";
 import { getNotesOfPosition } from "./getNotesOfPosition";
+import { getAscAndDescCoils } from "./getAscAndDescCoils";
 
 type KeyMaps = typeof keyMaps;
 
@@ -183,34 +184,18 @@ export const ascAndDescThreeNoteCoils = (
 
   // map through each position in a key
   keyMaps[scaleKey as keyof typeof keyMaps].forEach((position) => {
-    let newStaffLine = `tabstave notation=true key=${scaleKey} time=9/8`;
-
     // calculate each note of each position in the scaleKey
     const notesOfThisPosition = getNotesOfPosition(position);
-    const reversedNotesOfThisPosition = notesOfThisPosition
-      .slice(0, -1)
-      .reverse();
+    const reversedNotesOfThisPosition = [...notesOfThisPosition].reverse();
 
-    let notesInMeasure = "\nnotes :8 ";
-    let coilCount = 0; // Tracks when to coil
-    let noteCount = 0; // Tracks when to insert measure
-    for (let i = 0; i < 18; i++) {
-      const note = notesOfThisPosition[i];
-      noteCount++;
-      notesInMeasure += `${note}${noteCount % 9 === 0 ? "|" : ""} `;
+    const newStaffLine = getAscAndDescCoils(notesOfThisPosition, scaleKey);
+    const reversedNewStaffLine = getAscAndDescCoils(
+      reversedNotesOfThisPosition,
+      scaleKey
+    );
 
-      if (i === 17) break;
-      if (coilCount === 2) {
-        coilCount = 0;
-        i -= 2;
-        continue;
-      }
-      coilCount++;
-    }
-
-    notesInMeasure += "|";
-    newStaffLine += notesInMeasure;
     fullStaffLine += `\n${newStaffLine}`;
+    fullStaffLine += `\n${reversedNewStaffLine}`;
   });
   data += `\n${fullStaffLine}`;
   return data;
