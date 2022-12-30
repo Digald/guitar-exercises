@@ -175,7 +175,7 @@ export const ascOrDescThreeNoteCoils = (
   return data;
 };
 
-export const ascAndDescThreeNoteCoils = (
+export const alternatingThreeNoteCoils = (
   scaleKey: string,
   keyMaps: KeyMaps
 ): string => {
