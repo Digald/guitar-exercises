@@ -5,7 +5,9 @@ import {
   ascAndDesc,
   ascAndDescAlternating,
   ascOrDescThreeNoteCoils,
-  ascAndDescThreeNoteCoils
+  ascAndDescThreeNoteCoils,
+  alternatingThreeNoteCoils,
+  ascOrDescFourNoteCoils
 } from "./utils/exercises";
 
 declare global {
@@ -36,8 +38,9 @@ const Scale = ({ scaleKey, scaleType }: ScaleProps) => {
     // const data = ascAndDesc(scaleKey, keyMaps);
     // const data = ascAndDescAlternating(scaleKey, keyMaps);
     // const data = ascOrDescThreeNoteCoils(scaleKey, keyMaps, "asc");
-    const data = ascAndDescThreeNoteCoils(scaleKey, keyMaps);
-    console.log('log data', data);
+    // const data = ascAndDescThreeNoteCoils(scaleKey, keyMaps);
+    const data = ascOrDescFourNoteCoils(scaleKey, keyMaps,'asc');
+    // console.log('log data', data);
     // const data = `
     //     tabstave notation=true key=F time=18/8
     //     notes :8 1/6 3/6 5/6 1/5 3/5 5/5 2/4 3/4 5/4 2/3 3/3 5/3 3/2 5/2 6/2 3/1 5/1 6/1 |
