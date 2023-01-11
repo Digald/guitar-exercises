@@ -35,7 +35,7 @@ export const getAscAndDescFourCoils = (
   for (let i = 0; i < 18; i++) {
     const note = notesOfThisPosition[i];
     noteCount++;
-    notesInMeasure += `${note}${noteCount % 12 === 0 ? "|" : ""} `;
+    notesInMeasure += `${note}${noteCount % 12 === 0 ? " |" : ""} `;
 
     if (i === 17) break;
     if (coilCount === 3) {
@@ -45,7 +45,6 @@ export const getAscAndDescFourCoils = (
     }
     coilCount++;
   }
-  notesInMeasure += "|";
   newStaffLine += notesInMeasure;
   return newStaffLine;
 };

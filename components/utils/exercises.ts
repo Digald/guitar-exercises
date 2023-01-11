@@ -241,3 +241,60 @@ export const ascOrDescFourNoteCoils = (
   data += `\n${fullStaffLine}`;
   return data;
 };
+
+export const ascAndDescFourNoteCoils = (
+  scaleKey: string,
+  keyMaps: KeyMaps
+): string => {
+  let data = ""; // holds full display of staffs
+  let fullStaffLine = ""; // holds all of the lines for a single staff
+
+  // map through each position in a key
+  keyMaps[scaleKey as keyof typeof keyMaps].forEach((position) => {
+    // calculate each note of each position in the scaleKey
+    const notesOfThisPosition = getNotesOfPosition(position);
+    const reversedNotesOfThisPosition = [...notesOfThisPosition].reverse();
+
+    const newStaffLine = getAscAndDescFourCoils(notesOfThisPosition, scaleKey);
+    const reversedNewStaffLine = getAscAndDescFourCoils(
+      reversedNotesOfThisPosition,
+      scaleKey
+    );
+
+    fullStaffLine += `\n${newStaffLine}`;
+    fullStaffLine += `\n${reversedNewStaffLine}`;
+  });
+  data += `\n${fullStaffLine}`;
+  return data;
+};
+
+export const alternatingFourNoteCoils = (
+  scaleKey: string,
+  keyMaps: KeyMaps
+): string => {
+  let data = ""; // holds full display of staffs
+  let fullStaffLine = ""; // holds all of the lines for a single staff
+  const doubleKeyMaps = [
+    ...keyMaps[scaleKey as keyof typeof keyMaps],
+    ...keyMaps[scaleKey as keyof typeof keyMaps].slice(0, -1).reverse(),
+  ];
+
+  // map through each position in a key
+  doubleKeyMaps.forEach((position, index) => {
+    // calculate each note of each position in the scaleKey
+    const notesOfThisPosition = getNotesOfPosition(position);
+    if (index < 7 && index % 2) {
+      // If the position is below the first seven and is even
+      notesOfThisPosition.reverse();
+    } else if (index >= 7 && index % 2) {
+      // If the position is the next set of seven and is odd
+      notesOfThisPosition.reverse();
+    }
+
+    const newStaffLine = getAscAndDescFourCoils(notesOfThisPosition, scaleKey);
+
+    fullStaffLine += `\n${newStaffLine}`;
+  });
+  data += `\n${fullStaffLine}`;
+  return data;
+};

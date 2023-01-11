@@ -7,7 +7,9 @@ import {
   ascOrDescThreeNoteCoils,
   ascAndDescThreeNoteCoils,
   alternatingThreeNoteCoils,
-  ascOrDescFourNoteCoils
+  ascOrDescFourNoteCoils,
+  ascAndDescFourNoteCoils,
+  alternatingFourNoteCoils,
 } from "./utils/exercises";
 
 declare global {
@@ -39,14 +41,10 @@ const Scale = ({ scaleKey, scaleType }: ScaleProps) => {
     // const data = ascAndDescAlternating(scaleKey, keyMaps);
     // const data = ascOrDescThreeNoteCoils(scaleKey, keyMaps, "asc");
     // const data = ascAndDescThreeNoteCoils(scaleKey, keyMaps);
-    const data = ascOrDescFourNoteCoils(scaleKey, keyMaps,'asc');
+    // const data = ascOrDescFourNoteCoils(scaleKey, keyMaps, 'desc');
+    // const data = ascAndDescFourNoteCoils(scaleKey, keyMaps);
+    const data = alternatingFourNoteCoils(scaleKey, keyMaps);
     // console.log('log data', data);
-    // const data = `
-    //     tabstave notation=true key=F time=18/8
-    //     notes :8 1/6 3/6 5/6 1/5 3/5 5/5 2/4 3/4 5/4 2/3 3/3 5/3 3/2 5/2 6/2 3/1 5/1 6/1 |
-    //     notes :8 3/6 5/6 6/6 3/5 5/5 7/5 3/4 5/4 7/4 3/3 5/3 7/3 5/2 6/2 8/2 5/1 6/1 8/1 |
-    // `;
-    // console.log(data);
 
     if (vextab) {
       const VF = vextab?.Vex?.Flow;
