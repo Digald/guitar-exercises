@@ -298,3 +298,20 @@ export const alternatingFourNoteCoils = (
   data += `\n${fullStaffLine}`;
   return data;
 };
+
+export const singleString = (
+  scaleKey: string,
+  keyMaps: KeyMaps,
+  stringNumber: string
+): string => {
+  let data = ""; // holds full display of staffs
+  let fullStaffLine = ""; // holds all of the lines for a single staff
+  // map through each position in a key
+  keyMaps[scaleKey as keyof typeof keyMaps].forEach((position) => {
+    // calculate each note of each position in the scaleKey
+    const notesOfThisPosition = getNotesOfPosition(position);
+    console.log("log notesOfThisPosition", notesOfThisPosition);
+    
+  });
+  return data;
+};

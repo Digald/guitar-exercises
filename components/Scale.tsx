@@ -10,6 +10,7 @@ import {
   ascOrDescFourNoteCoils,
   ascAndDescFourNoteCoils,
   alternatingFourNoteCoils,
+  singleString
 } from "./utils/exercises";
 
 declare global {
@@ -43,7 +44,8 @@ const Scale = ({ scaleKey, scaleType }: ScaleProps) => {
     // const data = ascAndDescThreeNoteCoils(scaleKey, keyMaps);
     // const data = ascOrDescFourNoteCoils(scaleKey, keyMaps, 'desc');
     // const data = ascAndDescFourNoteCoils(scaleKey, keyMaps);
-    const data = alternatingFourNoteCoils(scaleKey, keyMaps);
+    // const data = alternatingFourNoteCoils(scaleKey, keyMaps);
+    const data = singleString(scaleKey, keyMaps, '6');
     // console.log('log data', data);
 
     if (vextab) {
