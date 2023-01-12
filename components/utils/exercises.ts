@@ -306,12 +306,70 @@ export const singleString = (
 ): string => {
   let data = ""; // holds full display of staffs
   let fullStaffLine = ""; // holds all of the lines for a single staff
+  let stringNotes: string[] = [];
   // map through each position in a key
   keyMaps[scaleKey as keyof typeof keyMaps].forEach((position) => {
     // calculate each note of each position in the scaleKey
     const notesOfThisPosition = getNotesOfPosition(position);
-    console.log("log notesOfThisPosition", notesOfThisPosition);
-    
+
+    notesOfThisPosition.forEach(note => {
+      const splitNote = note.split('/');
+      if (splitNote[1] === stringNumber) {
+        stringNotes.push(note);
+      }
+    });
   });
+
+  const newStaffLine = `tabstave notation=true key=${scaleKey} time=3/8`;
+  let notesInMeasure = "notes :8  ";
+  let count = 0;
+  stringNotes.forEach((note) => {
+    if (count === 2) {
+      notesInMeasure += `${note} | `;
+      count = 0;
+      return;
+    }
+    notesInMeasure += `${note} `;
+    count += 1;
+  });
+  data += `${newStaffLine}\n${notesInMeasure}`;
+  return data;
+};
+
+export const twoString = (
+  scaleKey: string,
+  keyMaps: KeyMaps,
+  stringNumber1: string,
+  stringNumber2: string
+): string => {
+  let data = ""; // holds full display of staffs
+  let fullStaffLine = ""; // holds all of the lines for a single staff
+  let stringNotes: string[] = [];
+  // map through each position in a key
+  keyMaps[scaleKey as keyof typeof keyMaps].forEach((position) => {
+    // calculate each note of each position in the scaleKey
+    const notesOfThisPosition = getNotesOfPosition(position);
+
+    notesOfThisPosition.forEach(note => {
+      const splitNote = note.split('/');
+      if (splitNote[1] === stringNumber1 || splitNote[1] === stringNumber2) {
+        stringNotes.push(note);
+      }
+    });
+  });
+  // TODO completely need more formula for this
+  const newStaffLine = `tabstave notation=true key=${scaleKey} time=4/8`;
+  let notesInMeasure = "notes :8  ";
+  let count = 0;
+  stringNotes.forEach((note) => {
+    if (count === 3) {
+      notesInMeasure += `${note} | `;
+      count = 0;
+      return;
+    }
+    notesInMeasure += `${note} `;
+    count += 1;
+  });
+  data += `${newStaffLine}\n${notesInMeasure}`;
   return data;
 };
