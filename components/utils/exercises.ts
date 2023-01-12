@@ -357,7 +357,7 @@ export const twoString = (
       }
     });
   });
-  // TODO completely need more formula for this
+  // TODO completely need different formula
   const newStaffLine = `tabstave notation=true key=${scaleKey} time=4/8`;
   let notesInMeasure = "notes :8  ";
   let count = 0;
