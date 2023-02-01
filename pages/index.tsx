@@ -1,7 +1,6 @@
 import { useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
 import KeySelect from "../components/KeySelect";
 import ScaleType from "../components/ScaleType";
 import Scale from "../components/Scale";
@@ -11,7 +10,7 @@ const Home: NextPage = () => {
   const [scaleType, setScaleType] = useState("major");
   const [key, setKey] = useState("F");
   return (
-    <div className={styles.container}>
+    <div>
       <Script src="https://unpkg.com/vextab@3.0.6/releases/main.dev.js"></Script>
       <Head>
         <title>Guitar Exercises</title>
@@ -19,13 +18,13 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <main>
         <ScaleType setScaleType={setScaleType} />
         <KeySelect setKey={setKey} scaleType={scaleType} />
         <Scale scaleKey={key} scaleType={scaleType} />
       </main>
 
-      <footer className={styles.footer}>
+      <footer>
         <a
           href="https://github.com/Digald"
           target="_blank"
