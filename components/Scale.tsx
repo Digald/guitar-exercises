@@ -13,6 +13,7 @@ import {
   singleString,
   twoString
 } from "./utils/exercises";
+import { scaleToneAscOrDesc } from './utils/scaleTones';
 
 declare global {
   interface Window {
@@ -46,8 +47,9 @@ const Scale = ({ scaleKey, scaleType }: ScaleProps) => {
     // const data = ascOrDescFourNoteCoils(scaleKey, keyMaps, 'desc');
     // const data = ascAndDescFourNoteCoils(scaleKey, keyMaps);
     // const data = alternatingFourNoteCoils(scaleKey, keyMaps);
-    // const data = singleString(scaleKey, keyMaps, '3');
-    const data = twoString(scaleKey, keyMaps, '6', '5');
+    // const data = singleString(scaleKey, keyMaps, '1');
+    // const data = twoString(scaleKey, keyMaps, '6', '5');
+    // const data = scaleToneAscOrDesc(scaleKey, keyMaps, "asc");
     // console.log('log data', data);
 
     if (vextab) {

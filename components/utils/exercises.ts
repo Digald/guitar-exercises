@@ -299,6 +299,7 @@ export const alternatingFourNoteCoils = (
   return data;
 };
 
+// TODO not accurate to the book exercise
 export const singleString = (
   scaleKey: string,
   keyMaps: KeyMaps,
@@ -336,6 +337,7 @@ export const singleString = (
   return data;
 };
 
+// TODO not accurate to the book exercise
 export const twoString = (
   scaleKey: string,
   keyMaps: KeyMaps,
