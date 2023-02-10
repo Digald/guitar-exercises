@@ -48,3 +48,11 @@ export const getAscAndDescFourCoils = (
   newStaffLine += notesInMeasure;
   return newStaffLine;
 };
+
+// TODO abstract the asc and desc logic and change file name here
+export const getAscAndDescScaleTones = (
+  notesOfThisPosition: string[],
+  scaleKey: string
+): string => {
+  return ''
+}
