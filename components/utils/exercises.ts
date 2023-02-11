@@ -3,7 +3,7 @@ import { getNotesOfPosition } from "./getNotesOfPosition";
 import {
   getAscAndDescThreeCoils,
   getAscAndDescFourCoils,
-} from "./getAscAndDescCoils";
+} from "./getAscAndDescNotes";
 
 type KeyMaps = typeof keyMaps;
 

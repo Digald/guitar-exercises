@@ -1,6 +1,6 @@
 import { keyMaps } from "./positions";
 import { getNotesOfPosition } from "./getNotesOfPosition";
-import { getAscAndDescScaleTones } from "./getAscAndDescCoils";
+import { getAscAndDescScaleTones } from "./getAscAndDescNotes";
 
 type KeyMaps = typeof keyMaps;
 
@@ -53,51 +53,22 @@ export const scaleToneAscAndDesc = (
   keyMaps: KeyMaps
 ): string => {
   let data = ""; // holds full display of staffs
+  let fullStaffLine = '';
 
   // map through each position in a key
   keyMaps[scaleKey as keyof typeof keyMaps].forEach((position) => {
-    let newStaffLine = `tabstave notation=true key=${scaleKey} time=6/8`;
-
     // calculate each note of each position in the scaleKey
     const notesOfThisPosition = getNotesOfPosition(position);
     const notesOfThisPositionReversed = notesOfThisPosition.slice().reverse();
 
-    newStaffLine += "\nnotes :8 ";
-    let count = 0;
 
-    const getScaleToneMeasure = (
-      i: number,
-      addition: number,
-      notes: string[]
-    ): string => {
-      newStaffLine += notes[i + addition] + " ";
-      count += 1;
+    const newStaffLine = getAscAndDescScaleTones(notesOfThisPosition, scaleKey);
+    const reversedStaffLine = getAscAndDescScaleTones(notesOfThisPositionReversed, scaleKey);
 
-      if (count === 6) {
-        newStaffLine += "| ";
-        count = 0;
-      }
-      return newStaffLine;
-    };
-
-    // Ascending staff line
-    for (let i = 0; i < 16; i++) {
-      i === 0 && getScaleToneMeasure(i, 0, notesOfThisPosition);
-      getScaleToneMeasure(i, 2, notesOfThisPosition);
-      i !== 15 && getScaleToneMeasure(i, 1, notesOfThisPosition);
-    }
-
-    // Descending staff line
-    count = 0;
-    newStaffLine += `\ntabstave notation=true key=${scaleKey} time=6/8\nnotes :8 `;
-    for (let i = 0; i < 16; i++) {
-      i === 0 && getScaleToneMeasure(i, 0, notesOfThisPositionReversed);
-      getScaleToneMeasure(i, 2, notesOfThisPositionReversed);
-      i !== 15 && getScaleToneMeasure(i, 1, notesOfThisPositionReversed);
-    }
-
-    data += `\n${newStaffLine}`;
+    fullStaffLine += `\n${newStaffLine}`;
+    fullStaffLine += `\n${reversedStaffLine}`;
   });
+  data += `\n${fullStaffLine}`;
   return data;
 };
 

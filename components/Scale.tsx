@@ -51,8 +51,8 @@ const Scale = ({ scaleKey, scaleType }: ScaleProps) => {
     // const data = singleString(scaleKey, keyMaps, '1');
     // const data = twoString(scaleKey, keyMaps, '6', '5');
     // const data = scaleToneAscOrDesc(scaleKey, keyMaps, "asc");
-    // const data = scaleToneAscAndDesc(scaleKey, keyMaps);
-    const data = scaleToneAlternating(scaleKey, keyMaps);
+    const data = scaleToneAscAndDesc(scaleKey, keyMaps);
+    // const data = scaleToneAlternating(scaleKey, keyMaps);
 
     if (vextab) {
       const VF = vextab?.Vex?.Flow;
