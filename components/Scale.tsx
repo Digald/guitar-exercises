@@ -46,13 +46,13 @@ const Scale = ({ scaleKey, scaleType }: ScaleProps) => {
     // const data = ascAndDescThreeNoteCoils(scaleKey, keyMaps);
     // const data = ascOrDescFourNoteCoils(scaleKey, keyMaps, 'desc');
     // const data = ascAndDescFourNoteCoils(scaleKey, keyMaps);
-    const data = alternatingThreeNoteCoils(scaleKey, keyMaps);
+    // const data = alternatingThreeNoteCoils(scaleKey, keyMaps);
     // const data = alternatingFourNoteCoils(scaleKey, keyMaps);
     // const data = singleString(scaleKey, keyMaps, '1');
     // const data = twoString(scaleKey, keyMaps, '6', '5');
     // const data = scaleToneAscOrDesc(scaleKey, keyMaps, "asc");
     // const data = scaleToneAscAndDesc(scaleKey, keyMaps);
-    // const data = scaleToneAlternating(scaleKey, keyMaps);
+    const data = scaleToneAlternating(scaleKey, keyMaps);
 
     if (vextab) {
       const VF = vextab?.Vex?.Flow;

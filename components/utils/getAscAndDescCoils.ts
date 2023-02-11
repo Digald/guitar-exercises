@@ -54,5 +54,30 @@ export const getAscAndDescScaleTones = (
   notesOfThisPosition: string[],
   scaleKey: string
 ): string => {
-  return ''
-}
+  let newStaffLine = `tabstave notation=true key=${scaleKey} time=6/8\nnotes :8 `;
+  let count = 0;
+
+  const getScaleToneMeasure = (
+    i: number,
+    addition: number,
+    notes: string[]
+  ): string => {
+    newStaffLine += notes[i + addition] + " ";
+    count += 1;
+
+    if (count === 6) {
+      newStaffLine += "| ";
+      count = 0;
+    }
+    return newStaffLine;
+  };
+
+  // Create scale tones
+  for (let i = 0; i < 16; i++) {
+    i === 0 && getScaleToneMeasure(i, 0, notesOfThisPosition);
+    getScaleToneMeasure(i, 2, notesOfThisPosition);
+    i !== 15 && getScaleToneMeasure(i, 1, notesOfThisPosition);
+  }
+
+  return newStaffLine;
+};
