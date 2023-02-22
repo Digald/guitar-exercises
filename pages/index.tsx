@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, createContext } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import KeySelect from "../components/KeySelect";
-import ScaleSelect from "../components/scaleSelect";
+import ScaleSelect from "../components/ScaleSelect";
 import Scale from "../components/Scale";
 import Script from "next/script";
+
+const ScaleContext = createContext({});
 
 const Home: NextPage = () => {
   const [scaleType, setScaleType] = useState("major");
@@ -19,9 +21,11 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <ScaleSelect setScaleType={setScaleType} />
-        <KeySelect setKey={setKey} scaleType={scaleType} />
-        <Scale scaleKey={key} scaleType={scaleType} />
+        <ScaleContext.Provider value={{scaleType, key}}>
+          <ScaleSelect setScaleType={setScaleType} />
+          <KeySelect setKey={setKey} scaleType={scaleType} />
+          <Scale scaleKey={key} scaleType={scaleType} />
+        </ScaleContext.Provider>
       </main>
 
       <footer>
