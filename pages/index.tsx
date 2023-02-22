@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import KeySelect from "../components/KeySelect";
-import ScaleType from "../components/ScaleType";
+import ScaleSelect from "../components/scaleSelect";
 import Scale from "../components/Scale";
 import Script from "next/script";
 
@@ -19,7 +19,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <ScaleType setScaleType={setScaleType} />
+        <ScaleSelect setScaleType={setScaleType} />
         <KeySelect setKey={setKey} scaleType={scaleType} />
         <Scale scaleKey={key} scaleType={scaleType} />
       </main>

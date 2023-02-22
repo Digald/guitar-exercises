@@ -1,4 +1,4 @@
-import { keyMaps } from "./positions";
+import { keyMaps } from "../data/majorPositions";
 import { getNotesOfPosition } from "./getNotesOfPosition";
 import {
   getAscAndDescThreeCoils,

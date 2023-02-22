@@ -33,6 +33,11 @@ const PENTATONIC_KEYS = [
   "E",
 ];
 
+type KeySelectProps = { setKey: (value: string) => void; scaleType: string };
+type KeySelectInputs = {
+  key: string;
+};
+
 function KeySelect({ setKey, scaleType }: KeySelectProps) {
   const {
     register,
@@ -47,7 +52,7 @@ function KeySelect({ setKey, scaleType }: KeySelectProps) {
   let keys: string[] = [];
   if (scaleType === "major") {
     keys = MAJOR_KEYS;
-  } else if (scaleType === "minor-pentatonic") {
+  } else if (scaleType === "minor") {
     keys = PENTATONIC_KEYS;
   }
 

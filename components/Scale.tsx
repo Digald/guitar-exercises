@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { keyMaps } from "./utils/positions";
+import { keyMaps } from "./data/majorPositions";
 import {
   ascOrDesc,
   ascAndDesc,
@@ -21,6 +21,11 @@ declare global {
   }
 }
 
+interface ScaleProps {
+  scaleKey: string;
+  scaleType: string;
+}
+
 const Scale = ({ scaleKey, scaleType }: ScaleProps) => {
   const [vextab, setVextab] = useState<VexState>(null);
 
@@ -39,7 +44,7 @@ const Scale = ({ scaleKey, scaleType }: ScaleProps) => {
     if (elementId) elementId.innerHTML = "";
 
     // Create data string based on key and scale
-    // const data = ascOrDesc(scaleKey, keyMaps, "asc");
+    const data = ascOrDesc(scaleKey, keyMaps, "asc");
     // const data = ascAndDesc(scaleKey, keyMaps);
     // const data = ascAndDescAlternating(scaleKey, keyMaps);
     // const data = ascOrDescThreeNoteCoils(scaleKey, keyMaps, "asc");
@@ -51,7 +56,7 @@ const Scale = ({ scaleKey, scaleType }: ScaleProps) => {
     // const data = singleString(scaleKey, keyMaps, '1');
     // const data = twoString(scaleKey, keyMaps, '6', '5');
     // const data = scaleToneAscOrDesc(scaleKey, keyMaps, "asc");
-    const data = scaleToneAscAndDesc(scaleKey, keyMaps);
+    // const data = scaleToneAscAndDesc(scaleKey, keyMaps);
     // const data = scaleToneAlternating(scaleKey, keyMaps);
 
     if (vextab) {

@@ -1,4 +1,4 @@
-import { positions } from "./positions";
+import { positions } from "../data/majorPositions";
 
 type Positions = typeof positions;
 interface Position {
