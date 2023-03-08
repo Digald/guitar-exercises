@@ -4,13 +4,14 @@ import {
   getAscAndDescThreeCoils,
   getAscAndDescFourCoils,
 } from "./getAscAndDescNotes";
+import { Options } from './types';
 
 type KeyMaps = typeof keyMaps;
 
 export const ascOrDesc = (
   scaleKey: string,
   keyMaps: KeyMaps,
-  type: exerciseType1
+  options: Options
 ): string => {
   let data = ""; // holds full display of staffs
   let fullStaffLine = ""; // holds all of the lines for a single staff
@@ -24,7 +25,7 @@ export const ascOrDesc = (
     const notesOfThisPosition = getNotesOfPosition(position);
 
     // is asc, desc, or both
-    if (type === "desc") {
+    if (options?.type === "desc") {
       notesOfThisPosition.reverse();
     }
 
@@ -136,7 +137,7 @@ export const ascAndDescAlternating = (
 export const ascOrDescThreeNoteCoils = (
   scaleKey: string,
   keyMaps: KeyMaps,
-  type: exerciseType1
+  options: Options
 ): string => {
   let data = ""; // holds full display of staffs
   let fullStaffLine = ""; // holds all of the lines for a single staff
@@ -146,8 +147,7 @@ export const ascOrDescThreeNoteCoils = (
     // calculate each note of each position in the scaleKey
     const notesOfThisPosition = getNotesOfPosition(position);
 
-    // is asc, desc, or both
-    if (type === "desc") {
+    if (options?.type === "desc") {
       notesOfThisPosition.reverse();
     }
 
@@ -218,7 +218,7 @@ export const alternatingThreeNoteCoils = (
 export const ascOrDescFourNoteCoils = (
   scaleKey: string,
   keyMaps: KeyMaps,
-  type: exerciseType1
+  options: Options
 ): string => {
   let data = ""; // holds full display of staffs
   let fullStaffLine = ""; // holds all of the lines for a single staff
@@ -230,8 +230,7 @@ export const ascOrDescFourNoteCoils = (
     // calculate each note of each position in the scaleKey
     const notesOfThisPosition = getNotesOfPosition(position);
 
-    // is asc, desc, or both
-    if (type === "desc") {
+    if (options?.type === "desc") {
       notesOfThisPosition.reverse();
     }
 
@@ -303,7 +302,7 @@ export const alternatingFourNoteCoils = (
 export const singleString = (
   scaleKey: string,
   keyMaps: KeyMaps,
-  stringNumber: string
+  options: Options
 ): string => {
   let data = ""; // holds full display of staffs
   let fullStaffLine = ""; // holds all of the lines for a single staff
@@ -315,7 +314,7 @@ export const singleString = (
 
     notesOfThisPosition.forEach(note => {
       const splitNote = note.split('/');
-      if (splitNote[1] === stringNumber) {
+      if (splitNote[1] === options?.string1) {
         stringNotes.push(note);
       }
     });
@@ -337,12 +336,11 @@ export const singleString = (
   return data;
 };
 
-// TODO not accurate to the book exercise
+// TODO entire scale is wrong REDO
 export const twoString = (
   scaleKey: string,
   keyMaps: KeyMaps,
-  stringNumber1: string,
-  stringNumber2: string
+  options: Options
 ): string => {
   let data = ""; // holds full display of staffs
   let fullStaffLine = ""; // holds all of the lines for a single staff
@@ -354,7 +352,7 @@ export const twoString = (
 
     notesOfThisPosition.forEach(note => {
       const splitNote = note.split('/');
-      if (splitNote[1] === stringNumber1 || splitNote[1] === stringNumber2) {
+      if (splitNote[1] === options?.string1 || splitNote[1] === options?.string2) {
         stringNotes.push(note);
       }
     });

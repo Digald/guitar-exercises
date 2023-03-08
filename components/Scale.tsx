@@ -18,6 +18,7 @@ import {
   scaleToneAscAndDesc,
   scaleToneAlternating,
 } from "./utils/scaleTones";
+import { Options } from './utils/types';
 
 declare global {
   interface Window {
@@ -25,32 +26,23 @@ declare global {
   }
 }
 
-interface ActiveScales {
-  asc: boolean;
-  desc: boolean;
-  ascDesc: boolean;
-  alt: boolean;
-  coilAsc: boolean;
-  coilDesc: boolean;
-  coilAscDesc: boolean;
-  coilAlt: boolean;
-  coil4Asc: boolean;
-  coil4Desc: boolean;
-  coil4AscDesc: boolean;
-  coil4Alt: boolean;
-  oneString: boolean;
-  twoString: boolean;
-  thirdsAsc: boolean;
-
-}
-
 interface ScaleProps {
-  scaleKey: string;
-  scaleType: string;
   id: string;
+  parseScale: Function;
+  options: Options;
+  scaleKey: string;
+  scaleName: string;
+  scaleType: string;
 }
 
-const Scale = ({ id, scaleKey, scaleType }: ScaleProps) => {
+const Scale = ({
+  id,
+  parseScale,
+  options,
+  scaleKey,
+  scaleName,
+  scaleType,
+}: ScaleProps) => {
   const [vextab, setVextab] = useState<VexState>(null);
 
   useEffect(() => {
@@ -68,7 +60,7 @@ const Scale = ({ id, scaleKey, scaleType }: ScaleProps) => {
     if (elementId) elementId.innerHTML = "";
 
     // Create data string based on key and scale
-    let data = ascOrDesc(scaleKey, keyMaps, "asc");
+    // let data = ascOrDesc(scaleKey, keyMaps, "asc");
     // data += ascAndDesc(scaleKey, keyMaps);
     // const data = ascAndDescAlternating(scaleKey, keyMaps);
     // const data = ascOrDescThreeNoteCoils(scaleKey, keyMaps, "asc");
@@ -82,6 +74,8 @@ const Scale = ({ id, scaleKey, scaleType }: ScaleProps) => {
     // const data = scaleToneAscOrDesc(scaleKey, keyMaps, "asc");
     // const data = scaleToneAscAndDesc(scaleKey, keyMaps);
     // const data = scaleToneAlternating(scaleKey, keyMaps);
+
+    const data = parseScale(scaleKey, keyMaps, options);
 
     if (vextab) {
       const VF = vextab?.Vex?.Flow;
@@ -99,10 +93,11 @@ const Scale = ({ id, scaleKey, scaleType }: ScaleProps) => {
       tab.parse(data);
       artist.render(renderer);
     }
-  }, [scaleKey, scaleType, vextab, id]);
+  }, [scaleKey, scaleType, vextab, id, options, parseScale]);
 
   return (
     <div className="vexbox mt-12">
+      <h2 className="text-4xl capitalize text-center">{scaleName}</h2>
       <div id={id}></div>
     </div>
   );

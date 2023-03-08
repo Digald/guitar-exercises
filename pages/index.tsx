@@ -4,6 +4,11 @@ import Head from "next/head";
 import Scale from "../components/Scale";
 import Script from "next/script";
 import NavBar from "../components/NavBar";
+import {
+  ascOrDesc,
+  ascOrDescThreeNoteCoils,
+  twoString
+} from '../components/utils/exercises';
 
 const Home: NextPage = () => {
   const [scaleType, setScaleType] = useState("major");
@@ -23,7 +28,7 @@ const Home: NextPage = () => {
           scaleType={scaleType}
           setKey={setKey}
         />
-        <Scale scaleKey={key} scaleType={scaleType} id="boo"/>
+        <Scale scaleKey={key} scaleType={scaleType} id="boo" scaleName="Ascending" parseScale={twoString} options={{string1: '6', string2: '5'}}/>
       </main>
 
       <footer>

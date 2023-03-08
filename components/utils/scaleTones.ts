@@ -1,13 +1,14 @@
 import { keyMaps } from "../data/majorPositions";
 import { getNotesOfPosition } from "./getNotesOfPosition";
 import { getAscAndDescScaleTones } from "./getAscAndDescNotes";
+import { Options } from './types';
 
 type KeyMaps = typeof keyMaps;
 
 export const scaleToneAscOrDesc = (
   scaleKey: string,
   keyMaps: KeyMaps,
-  type: exerciseType1
+  options: Options
 ): string => {
   let data = ""; // holds full display of staffs
 
@@ -19,7 +20,7 @@ export const scaleToneAscOrDesc = (
     const notesOfThisPosition = getNotesOfPosition(position);
 
     // is asc, desc, or both
-    if (type === "desc") {
+    if (options?.type === "desc") {
       notesOfThisPosition.reverse();
     }
 
