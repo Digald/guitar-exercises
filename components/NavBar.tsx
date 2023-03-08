@@ -14,7 +14,7 @@ function NavBar({
   setScaleType
 }: NavBarProps) {
   return (
-    <div className="">
+    <div className="fixed top-0 w-full shadow-xl flex justify-evenly items-center h-12">
         <KeySelect setKey={setKey} scaleType={scaleType} />
         <ScaleSelect setScaleType={setScaleType}/>
     </div>

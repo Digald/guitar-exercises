@@ -11,9 +11,13 @@ import {
   ascAndDescFourNoteCoils,
   alternatingFourNoteCoils,
   singleString,
-  twoString
+  twoString,
 } from "./utils/exercises";
-import { scaleToneAscOrDesc, scaleToneAscAndDesc, scaleToneAlternating } from './utils/scaleTones';
+import {
+  scaleToneAscOrDesc,
+  scaleToneAscAndDesc,
+  scaleToneAlternating,
+} from "./utils/scaleTones";
 
 declare global {
   interface Window {
@@ -21,12 +25,32 @@ declare global {
   }
 }
 
+interface ActiveScales {
+  asc: boolean;
+  desc: boolean;
+  ascDesc: boolean;
+  alt: boolean;
+  coilAsc: boolean;
+  coilDesc: boolean;
+  coilAscDesc: boolean;
+  coilAlt: boolean;
+  coil4Asc: boolean;
+  coil4Desc: boolean;
+  coil4AscDesc: boolean;
+  coil4Alt: boolean;
+  oneString: boolean;
+  twoString: boolean;
+  thirdsAsc: boolean;
+
+}
+
 interface ScaleProps {
   scaleKey: string;
   scaleType: string;
+  id: string;
 }
 
-const Scale = ({ scaleKey, scaleType }: ScaleProps) => {
+const Scale = ({ id, scaleKey, scaleType }: ScaleProps) => {
   const [vextab, setVextab] = useState<VexState>(null);
 
   useEffect(() => {
@@ -40,12 +64,12 @@ const Scale = ({ scaleKey, scaleType }: ScaleProps) => {
   }, []);
 
   useEffect(() => {
-    const elementId = document.getElementById("boo");
+    const elementId = document.getElementById(id);
     if (elementId) elementId.innerHTML = "";
 
     // Create data string based on key and scale
-    const data = ascOrDesc(scaleKey, keyMaps, "asc");
-    // const data = ascAndDesc(scaleKey, keyMaps);
+    let data = ascOrDesc(scaleKey, keyMaps, "asc");
+    // data += ascAndDesc(scaleKey, keyMaps);
     // const data = ascAndDescAlternating(scaleKey, keyMaps);
     // const data = ascOrDescThreeNoteCoils(scaleKey, keyMaps, "asc");
     // const data = ascAndDescThreeNoteCoils(scaleKey, keyMaps);
@@ -53,8 +77,8 @@ const Scale = ({ scaleKey, scaleType }: ScaleProps) => {
     // const data = ascAndDescFourNoteCoils(scaleKey, keyMaps);
     // const data = alternatingThreeNoteCoils(scaleKey, keyMaps);
     // const data = alternatingFourNoteCoils(scaleKey, keyMaps);
-    // const data = singleString(scaleKey, keyMaps, '1');
-    // const data = twoString(scaleKey, keyMaps, '6', '5');
+    // data += singleString(scaleKey, keyMaps, '1');
+    // data += twoString(scaleKey, keyMaps, '6', '5');
     // const data = scaleToneAscOrDesc(scaleKey, keyMaps, "asc");
     // const data = scaleToneAscAndDesc(scaleKey, keyMaps);
     // const data = scaleToneAlternating(scaleKey, keyMaps);
@@ -75,11 +99,11 @@ const Scale = ({ scaleKey, scaleType }: ScaleProps) => {
       tab.parse(data);
       artist.render(renderer);
     }
-  }, [scaleKey, scaleType, vextab]);
+  }, [scaleKey, scaleType, vextab, id]);
 
   return (
-    <div className="vexbox">
-      <div id="boo"></div>
+    <div className="vexbox mt-12">
+      <div id={id}></div>
     </div>
   );
 };

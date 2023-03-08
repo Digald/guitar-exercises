@@ -23,7 +23,7 @@ const Home: NextPage = () => {
           scaleType={scaleType}
           setKey={setKey}
         />
-        <Scale scaleKey={key} scaleType={scaleType} />
+        <Scale scaleKey={key} scaleType={scaleType} id="boo"/>
       </main>
 
       <footer>
