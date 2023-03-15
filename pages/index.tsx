@@ -6,9 +6,22 @@ import Script from "next/script";
 import NavBar from "../components/NavBar";
 import {
   ascOrDesc,
+  ascAndDesc,
+  ascAndDescAlternating,
   ascOrDescThreeNoteCoils,
-  twoString
-} from '../components/utils/exercises';
+  ascAndDescThreeNoteCoils,
+  alternatingThreeNoteCoils,
+  ascOrDescFourNoteCoils,
+  ascAndDescFourNoteCoils,
+  alternatingFourNoteCoils,
+  singleString,
+  twoString,
+} from "../components/utils/exercises";
+import {
+  scaleToneAscOrDesc,
+  scaleToneAscAndDesc,
+  scaleToneAlternating,
+} from "../components/utils/scaleTones";
 
 const Home: NextPage = () => {
   const [scaleType, setScaleType] = useState("major");
@@ -28,7 +41,110 @@ const Home: NextPage = () => {
           scaleType={scaleType}
           setKey={setKey}
         />
-        <Scale scaleKey={key} scaleType={scaleType} id="boo" scaleName="Ascending" parseScale={twoString} options={{string1: '6', string2: '5'}}/>
+        <Scale
+          scaleKey={key}
+          scaleType={scaleType}
+          id="a1"
+          scaleName="Ascending"
+          parseScale={ascOrDesc}
+          options={{ type: "asc" }}
+        />
+        <Scale
+          scaleKey={key}
+          scaleType={scaleType}
+          id="a2"
+          scaleName="Descending"
+          parseScale={ascOrDesc}
+          options={{ type: "desc" }}
+        />
+        <Scale
+          scaleKey={key}
+          scaleType={scaleType}
+          id="a3"
+          scaleName="Asc and Desc"
+          parseScale={ascAndDesc}
+          options={{}}
+        />
+        <Scale
+          scaleKey={key}
+          scaleType={scaleType}
+          id="a4"
+          scaleName="Asc and Desc Alternating"
+          parseScale={ascAndDescAlternating}
+          options={{}}
+        />
+        <Scale
+          scaleKey={key}
+          scaleType={scaleType}
+          id="a5"
+          scaleName="Asc Three Note Coils"
+          parseScale={ascOrDescThreeNoteCoils}
+          options={{ type: "asc" }}
+        />
+        <Scale
+          scaleKey={key}
+          scaleType={scaleType}
+          id="a6"
+          scaleName="Desc Three Note Coils"
+          parseScale={ascOrDescThreeNoteCoils}
+          options={{ type: "desc" }}
+        />
+        <Scale
+          scaleKey={key}
+          scaleType={scaleType}
+          id="a7"
+          scaleName="Asc & Desc Three Note Coils"
+          parseScale={ascAndDescThreeNoteCoils}
+          options={{}}
+        />
+        <Scale
+          scaleKey={key}
+          scaleType={scaleType}
+          id="a8"
+          scaleName="Alternating Three Note Coils"
+          parseScale={alternatingThreeNoteCoils}
+          options={{}}
+        />
+        <Scale
+          scaleKey={key}
+          scaleType={scaleType}
+          id="a9"
+          scaleName="Asc Four Note Coils"
+          parseScale={ascOrDescFourNoteCoils}
+          options={{ type: "asc" }}
+        />
+        <Scale
+          scaleKey={key}
+          scaleType={scaleType}
+          id="a10"
+          scaleName="Desc Four Note Coils"
+          parseScale={ascOrDescFourNoteCoils}
+          options={{ type: "desc" }}
+        />
+        <Scale
+          scaleKey={key}
+          scaleType={scaleType}
+          id="a11"
+          scaleName="Asc & Desc Four Note Coils"
+          parseScale={ascAndDescFourNoteCoils}
+          options={{}}
+        />
+        <Scale
+          scaleKey={key}
+          scaleType={scaleType}
+          id="a12"
+          scaleName="Alternating Four Note Coils"
+          parseScale={alternatingFourNoteCoils}
+          options={{}}
+        />
+        <Scale
+          scaleKey={key}
+          scaleType={scaleType}
+          id="a13"
+          scaleName="Single String 6"
+          parseScale={singleString}
+          options={{string1: "6"}}
+        />
       </main>
 
       <footer>

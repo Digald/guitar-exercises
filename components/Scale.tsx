@@ -1,24 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { keyMaps } from "./data/majorPositions";
-import {
-  ascOrDesc,
-  ascAndDesc,
-  ascAndDescAlternating,
-  ascOrDescThreeNoteCoils,
-  ascAndDescThreeNoteCoils,
-  alternatingThreeNoteCoils,
-  ascOrDescFourNoteCoils,
-  ascAndDescFourNoteCoils,
-  alternatingFourNoteCoils,
-  singleString,
-  twoString,
-} from "./utils/exercises";
-import {
-  scaleToneAscOrDesc,
-  scaleToneAscAndDesc,
-  scaleToneAlternating,
-} from "./utils/scaleTones";
-import { Options } from './utils/types';
+import { Options } from "./utils/types";
 
 declare global {
   interface Window {
@@ -45,6 +27,8 @@ const Scale = ({
 }: ScaleProps) => {
   const [vextab, setVextab] = useState<VexState>(null);
 
+  const data = parseScale(scaleKey, keyMaps, options);
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (!window?.vextab) {
@@ -59,28 +43,10 @@ const Scale = ({
     const elementId = document.getElementById(id);
     if (elementId) elementId.innerHTML = "";
 
-    // Create data string based on key and scale
-    // let data = ascOrDesc(scaleKey, keyMaps, "asc");
-    // data += ascAndDesc(scaleKey, keyMaps);
-    // const data = ascAndDescAlternating(scaleKey, keyMaps);
-    // const data = ascOrDescThreeNoteCoils(scaleKey, keyMaps, "asc");
-    // const data = ascAndDescThreeNoteCoils(scaleKey, keyMaps);
-    // const data = ascOrDescFourNoteCoils(scaleKey, keyMaps, 'desc');
-    // const data = ascAndDescFourNoteCoils(scaleKey, keyMaps);
-    // const data = alternatingThreeNoteCoils(scaleKey, keyMaps);
-    // const data = alternatingFourNoteCoils(scaleKey, keyMaps);
-    // data += singleString(scaleKey, keyMaps, '1');
-    // data += twoString(scaleKey, keyMaps, '6', '5');
-    // const data = scaleToneAscOrDesc(scaleKey, keyMaps, "asc");
-    // const data = scaleToneAscAndDesc(scaleKey, keyMaps);
-    // const data = scaleToneAlternating(scaleKey, keyMaps);
-
-    const data = parseScale(scaleKey, keyMaps, options);
-
-    if (vextab) {
+    if (vextab && elementId) {
       const VF = vextab?.Vex?.Flow;
       const renderer = new VF.Renderer(
-        document.getElementById("boo"),
+        elementId,
         VF.Renderer.Backends.SVG
       );
 
@@ -92,8 +58,9 @@ const Scale = ({
 
       tab.parse(data);
       artist.render(renderer);
+      console.log('done', id, data);
     }
-  }, [scaleKey, scaleType, vextab, id, options, parseScale]);
+  }, [vextab, id, data]);
 
   return (
     <div className="vexbox mt-12">
