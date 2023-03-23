@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { keyMaps } from "./data/majorPositions";
 import { Options } from "./utils/types";
 
@@ -58,7 +58,6 @@ const Scale = ({
 
       tab.parse(data);
       artist.render(renderer);
-      console.log('done', id, data);
     }
   }, [vextab, id, data]);
 

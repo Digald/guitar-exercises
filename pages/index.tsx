@@ -4,6 +4,7 @@ import Head from "next/head";
 import Scale from "../components/Scale";
 import Script from "next/script";
 import NavBar from "../components/NavBar";
+import {ButtonListItem} from '../components/utils/types';
 import {
   ascOrDesc,
   ascAndDesc,
@@ -26,6 +27,12 @@ import {
 const Home: NextPage = () => {
   const [scaleType, setScaleType] = useState("major");
   const [key, setKey] = useState("F");
+  const [exerciseList, setExerciseList] = useState<ButtonListItem[]>([]);
+
+  const editExerciseList = (buttonListItem: ButtonListItem, isRemoving = false) => {
+    // Logic here
+  }
+
   return (
     <div>
       <Script src="https://unpkg.com/vextab@3.0.6/releases/main.dev.js"></Script>
@@ -40,6 +47,7 @@ const Home: NextPage = () => {
           setScaleType={setScaleType}
           scaleType={scaleType}
           setKey={setKey}
+          setExerciseList={setExerciseList}
         />
         <Scale
           scaleKey={key}
