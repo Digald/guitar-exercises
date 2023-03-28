@@ -45,10 +45,7 @@ const Scale = ({
 
     if (vextab && elementId) {
       const VF = vextab?.Vex?.Flow;
-      const renderer = new VF.Renderer(
-        elementId,
-        VF.Renderer.Backends.SVG
-      );
+      const renderer = new VF.Renderer(elementId, VF.Renderer.Backends.SVG);
 
       // Initialize VexTab artist and parser.
       const artist = new vextab.Artist(10, 10, window?.innerWidth, {

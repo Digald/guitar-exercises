@@ -4,7 +4,7 @@ import {
   getAscAndDescThreeCoils,
   getAscAndDescFourCoils,
 } from "./getAscAndDescNotes";
-import { Options } from './types';
+import { Options } from "./types";
 
 type KeyMaps = typeof keyMaps;
 
@@ -299,40 +299,43 @@ export const alternatingFourNoteCoils = (
 };
 
 // TODO not accurate to the book exercise
-export const singleString = (
-  scaleKey: string,
-  keyMaps: KeyMaps,
-  options: Options
-): string => {
+export const singleString = (scaleKey: string, keyMaps: KeyMaps): string => {
   let data = ""; // holds full display of staffs
-  let fullStaffLine = ""; // holds all of the lines for a single staff
-  let stringNotes: string[] = [];
+  const stringNotes: Record<string, string[]> = {
+    6: [],
+    5: [],
+    4: [],
+    3: [],
+    2: [],
+    1: [],
+  };
   // map through each position in a key
   keyMaps[scaleKey as keyof typeof keyMaps].forEach((position) => {
     // calculate each note of each position in the scaleKey
     const notesOfThisPosition = getNotesOfPosition(position);
 
-    notesOfThisPosition.forEach(note => {
-      const splitNote = note.split('/');
-      if (splitNote[1] === options?.string1) {
-        stringNotes.push(note);
-      }
+    notesOfThisPosition.forEach((note) => {
+      const splitNote = note.split("/");
+      stringNotes[splitNote[1]].push(note);
     });
   });
 
-  const newStaffLine = `tabstave notation=true key=${scaleKey} time=3/8`;
-  let notesInMeasure = "notes :8  ";
-  let count = 0;
-  stringNotes.forEach((note) => {
-    if (count === 2) {
-      notesInMeasure += `${note} | `;
-      count = 0;
-      return;
-    }
-    notesInMeasure += `${note} `;
-    count += 1;
-  });
-  data += `${newStaffLine}\n${notesInMeasure}`;
+  for (let i = 6; i > 0; i--) {
+    const newStaffLine = `\ntabstave notation=true key=${scaleKey} time=3/8`;
+    let notesInMeasure = "notes :8  ";
+    let count = 0;
+    stringNotes[i.toString()].forEach((note) => {
+      if (count === 2) {
+        notesInMeasure += `${note} | `;
+        count = 0;
+        return;
+      }
+      notesInMeasure += `${note} `;
+      count += 1;
+    });
+    data += `${newStaffLine}\n${notesInMeasure}`;
+  }
+
   return data;
 };
 
@@ -345,18 +348,43 @@ export const twoString = (
   let data = ""; // holds full display of staffs
   let fullStaffLine = ""; // holds all of the lines for a single staff
   let stringNotes: string[] = [];
+  const stringNotes2: Record<string, string[]> = {
+    65: [],
+    54: [],
+    43: [],
+    32: [],
+    21: [],
+  };
   // map through each position in a key
   keyMaps[scaleKey as keyof typeof keyMaps].forEach((position) => {
     // calculate each note of each position in the scaleKey
     const notesOfThisPosition = getNotesOfPosition(position);
 
-    notesOfThisPosition.forEach(note => {
-      const splitNote = note.split('/');
-      if (splitNote[1] === options?.string1 || splitNote[1] === options?.string2) {
+    notesOfThisPosition.forEach((note) => {
+      const splitNote = note.split("/");
+      if (
+        splitNote[1] === options?.string1 ||
+        splitNote[1] === options?.string2
+      ) {
         stringNotes.push(note);
       }
     });
+
+    notesOfThisPosition.forEach((note) => {
+      const splitNote = note.split("/");
+      const keys = Object.keys(stringNotes2).filter((k) =>
+        k.includes(splitNote[1])
+      );
+
+      console.log("log position", position, note);
+      keys.forEach((k) => {
+        stringNotes2[k].push(note);
+      });
+    });
   });
+
+  // TODO Since the formula is incorrect, setting up the string notes may be different
+  console.log("log stringNotes2", stringNotes2);
   // TODO completely need different formula
   const newStaffLine = `tabstave notation=true key=${scaleKey} time=4/8`;
   let notesInMeasure = "notes :8  ";

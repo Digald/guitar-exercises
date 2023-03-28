@@ -4,34 +4,12 @@ import Head from "next/head";
 import Scale from "../components/Scale";
 import Script from "next/script";
 import NavBar from "../components/NavBar";
-import {ButtonListItem} from '../components/utils/types';
-import {
-  ascOrDesc,
-  ascAndDesc,
-  ascAndDescAlternating,
-  ascOrDescThreeNoteCoils,
-  ascAndDescThreeNoteCoils,
-  alternatingThreeNoteCoils,
-  ascOrDescFourNoteCoils,
-  ascAndDescFourNoteCoils,
-  alternatingFourNoteCoils,
-  singleString,
-  twoString,
-} from "../components/utils/exercises";
-import {
-  scaleToneAscOrDesc,
-  scaleToneAscAndDesc,
-  scaleToneAlternating,
-} from "../components/utils/scaleTones";
+import { ButtonListItem, SetExerciseList } from "../components/utils/types";
 
 const Home: NextPage = () => {
   const [scaleType, setScaleType] = useState("major");
   const [key, setKey] = useState("F");
   const [exerciseList, setExerciseList] = useState<ButtonListItem[]>([]);
-
-  const editExerciseList = (buttonListItem: ButtonListItem, isRemoving = false) => {
-    // Logic here
-  }
 
   return (
     <div>
@@ -47,112 +25,22 @@ const Home: NextPage = () => {
           setScaleType={setScaleType}
           scaleType={scaleType}
           setKey={setKey}
+          // @ts-ignore
           setExerciseList={setExerciseList}
+          exerciseList={exerciseList}
         />
-        <Scale
-          scaleKey={key}
-          scaleType={scaleType}
-          id="a1"
-          scaleName="Ascending"
-          parseScale={ascOrDesc}
-          options={{ type: "asc" }}
-        />
-        <Scale
-          scaleKey={key}
-          scaleType={scaleType}
-          id="a2"
-          scaleName="Descending"
-          parseScale={ascOrDesc}
-          options={{ type: "desc" }}
-        />
-        <Scale
-          scaleKey={key}
-          scaleType={scaleType}
-          id="a3"
-          scaleName="Asc and Desc"
-          parseScale={ascAndDesc}
-          options={{}}
-        />
-        <Scale
-          scaleKey={key}
-          scaleType={scaleType}
-          id="a4"
-          scaleName="Asc and Desc Alternating"
-          parseScale={ascAndDescAlternating}
-          options={{}}
-        />
-        <Scale
-          scaleKey={key}
-          scaleType={scaleType}
-          id="a5"
-          scaleName="Asc Three Note Coils"
-          parseScale={ascOrDescThreeNoteCoils}
-          options={{ type: "asc" }}
-        />
-        <Scale
-          scaleKey={key}
-          scaleType={scaleType}
-          id="a6"
-          scaleName="Desc Three Note Coils"
-          parseScale={ascOrDescThreeNoteCoils}
-          options={{ type: "desc" }}
-        />
-        <Scale
-          scaleKey={key}
-          scaleType={scaleType}
-          id="a7"
-          scaleName="Asc & Desc Three Note Coils"
-          parseScale={ascAndDescThreeNoteCoils}
-          options={{}}
-        />
-        <Scale
-          scaleKey={key}
-          scaleType={scaleType}
-          id="a8"
-          scaleName="Alternating Three Note Coils"
-          parseScale={alternatingThreeNoteCoils}
-          options={{}}
-        />
-        <Scale
-          scaleKey={key}
-          scaleType={scaleType}
-          id="a9"
-          scaleName="Asc Four Note Coils"
-          parseScale={ascOrDescFourNoteCoils}
-          options={{ type: "asc" }}
-        />
-        <Scale
-          scaleKey={key}
-          scaleType={scaleType}
-          id="a10"
-          scaleName="Desc Four Note Coils"
-          parseScale={ascOrDescFourNoteCoils}
-          options={{ type: "desc" }}
-        />
-        <Scale
-          scaleKey={key}
-          scaleType={scaleType}
-          id="a11"
-          scaleName="Asc & Desc Four Note Coils"
-          parseScale={ascAndDescFourNoteCoils}
-          options={{}}
-        />
-        <Scale
-          scaleKey={key}
-          scaleType={scaleType}
-          id="a12"
-          scaleName="Alternating Four Note Coils"
-          parseScale={alternatingFourNoteCoils}
-          options={{}}
-        />
-        <Scale
-          scaleKey={key}
-          scaleType={scaleType}
-          id="a13"
-          scaleName="Single String 6"
-          parseScale={singleString}
-          options={{string1: "6"}}
-        />
+        {Array.isArray(exerciseList) &&
+          exerciseList?.map((exercise: ButtonListItem, index: number) => (
+            <Scale
+              key={exercise.name}
+              scaleKey={key}
+              scaleType={scaleType}
+              id={`i-${index}`}
+              scaleName={exercise.name}
+              parseScale={exercise.function}
+              options={exercise.options || {}}
+            />
+          ))}
       </main>
 
       <footer>

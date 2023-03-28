@@ -1,40 +1,29 @@
-import React, { useState } from "react";
-import KeySelect from "./KeySelect";
-import ScaleSelect from "./ScaleSelect";
-import { ButtonListItem } from "./utils/types";
+import React from "react";
+import { ButtonListItem, SetExerciseList } from "./utils/types";
+import { buttonList } from "./data/buttonList";
 import Button from "./Button";
-import {
-  ascOrDesc,
-  ascAndDesc,
-  ascAndDescAlternating,
-  ascOrDescThreeNoteCoils,
-  ascAndDescThreeNoteCoils,
-  alternatingThreeNoteCoils,
-  ascOrDescFourNoteCoils,
-  ascAndDescFourNoteCoils,
-  alternatingFourNoteCoils,
-  singleString,
-  twoString,
-} from "../components/utils/exercises";
-
-const buttonList: ButtonListItem[] = [
-  {
-    name: "Ascending",
-    function: ascOrDesc,
-    options: { type: "asc" },
-  },
-];
 
 type FilterExerciseProps = {
-  setExerciseList: (value: ButtonListItem[]) => void;
+  setExerciseList: SetExerciseList;
+  exerciseList: ButtonListItem[];
+  scaleType: string;
 };
 
-function FilterExercise({ setExerciseList }: FilterExerciseProps) {
+function FilterExercise({
+  setExerciseList,
+  exerciseList,
+  scaleType,
+}: FilterExerciseProps) {
   return (
     <>
       {buttonList.map((buttonListItem) => {
         return (
-          <Button buttonListItem={buttonListItem} key={buttonListItem.name} />
+          <Button
+            buttonListItem={buttonListItem}
+            key={buttonListItem.name}
+            setExerciseList={setExerciseList}
+            exerciseList={exerciseList}
+          />
         );
       })}
     </>

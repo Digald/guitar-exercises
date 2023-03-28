@@ -9,3 +9,5 @@ export interface ButtonListItem {
   function: Function;
   options?: Options;
 }
+
+export type SetExerciseList = (prevState: ButtonListItem[] | Function) => ButtonListItem[];
