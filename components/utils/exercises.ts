@@ -347,13 +347,14 @@ export const twoString = (
 ): string => {
   let data = ""; // holds full display of staffs
   let fullStaffLine = ""; // holds all of the lines for a single staff
-  let stringNotes: string[] = [];
-  const stringNotes2: Record<string, string[]> = {
-    65: [],
-    54: [],
-    43: [],
-    32: [],
-    21: [],
+  // let stringNotes: string[] = [];
+  const stringNotes: Record<string, string[]> = {
+    6: [],
+    5: [],
+    4: [],
+    3: [],
+    2: [],
+    1: [],
   };
   // map through each position in a key
   keyMaps[scaleKey as keyof typeof keyMaps].forEach((position) => {
@@ -362,42 +363,49 @@ export const twoString = (
 
     notesOfThisPosition.forEach((note) => {
       const splitNote = note.split("/");
-      if (
-        splitNote[1] === options?.string1 ||
-        splitNote[1] === options?.string2
-      ) {
-        stringNotes.push(note);
+      const string = splitNote[1];
+      if (!stringNotes[string].includes(note)) {
+        stringNotes[string].push(note);
       }
     });
-
-    notesOfThisPosition.forEach((note) => {
-      const splitNote = note.split("/");
-      const keys = Object.keys(stringNotes2).filter((k) =>
-        k.includes(splitNote[1])
-      );
-
-      console.log("log position", position, note);
-      keys.forEach((k) => {
-        stringNotes2[k].push(note);
-      });
-    });
   });
 
-  // TODO Since the formula is incorrect, setting up the string notes may be different
-  console.log("log stringNotes2", stringNotes2);
-  // TODO completely need different formula
-  const newStaffLine = `tabstave notation=true key=${scaleKey} time=4/8`;
-  let notesInMeasure = "notes :8  ";
-  let count = 0;
-  stringNotes.forEach((note) => {
-    if (count === 3) {
-      notesInMeasure += `${note} | `;
-      count = 0;
-      return;
+  console.log("log stringNotes", stringNotes);
+
+  for (let i = 6; i > 1; i--) {
+    const newStaffLine = `\ntabstave notation=true key=${scaleKey} time=3/8`;
+    let notesInMeasure = "notes :8  ";
+    // let count = 0;
+    // let element = 0;
+    // stringNotes[i.toString()].forEach((note) => {
+    //   if (count === 3) {
+    //     notesInMeasure += `${stringNotes[(i - 1).toString()][element]} | `;
+    //     count = 0;
+    //     return;
+    //   }
+    //   notesInMeasure += `${note} `;
+    //   count += 1;
+    // });
+    const bigStringArr = stringNotes[i];
+    const littleStringArr = stringNotes[i - 1];
+    let bigStringCount = 0;
+    let littleStringCount = 0;
+
+    for (let i = 0; i < 8; i++) {
+      if (!bigStringArr[bigStringCount + 2]) {
+        // The final note is not available due to the scales. Need to maybe include a new object here with values?
+        const replacementNote = bigStringArr[bigStringCount + 1].split("/")[0];
+        console.log("log replacementNote", replacementNote);
+      }
+      notesInMeasure += `${bigStringArr[bigStringCount]} `;
+      notesInMeasure += `${bigStringArr[bigStringCount + 1]} `;
+      notesInMeasure += `${bigStringArr[bigStringCount + 2]} `;
+      notesInMeasure += `${littleStringArr[littleStringCount]} | `;
+      bigStringCount += 1;
+      littleStringCount += 1;
+      // console.log("log notesInMeasure", notesInMeasure);
     }
-    notesInMeasure += `${note} `;
-    count += 1;
-  });
-  data += `${newStaffLine}\n${notesInMeasure}`;
+    data += `${newStaffLine}\n${notesInMeasure}`;
+  }
   return data;
 };
