@@ -22,7 +22,7 @@ function ScaleSelect({ setScaleType }: ScaleSelectProps) {
       <label>Scale Type</label>
       <select {...register("scaleSelect")}>
         <option value="major">Major</option>
-        <option value="minor">Minor Pentatonic</option>
+        {/* <option value="minor">Minor Pentatonic</option> */}
       </select>
     </form>
   );

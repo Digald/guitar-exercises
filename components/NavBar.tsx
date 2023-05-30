@@ -26,6 +26,14 @@ function NavBar({
 
   return (
     <div className="flex flex-col">
+      <a
+        href="https://github.com/Digald"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="p-2.5 mb-2.5 text-center text-white name-banner"
+      >
+        Created by Mark Alaniz
+      </a>
       <div>
         <KeySelect setKey={setKey} scaleType={scaleType} />
         <ScaleSelect setScaleType={setScaleType} />

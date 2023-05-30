@@ -1,10 +1,11 @@
 import { useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
-import Scale from "../components/Scale";
 import Script from "next/script";
+import Scale from "../components/Scale";
 import NavBar from "../components/NavBar";
-import { ButtonListItem, SetExerciseList } from "../components/utils/types";
+import { ButtonListItem } from "../components/utils/types";
+import AutoScroller from "../components/AutoScroller";
 
 const Home: NextPage = () => {
   const [scaleType, setScaleType] = useState("major");
@@ -34,24 +35,14 @@ const Home: NextPage = () => {
             <Scale
               key={exercise.name}
               scaleKey={key}
-              scaleType={scaleType}
               id={`i-${index}`}
               scaleName={exercise.name}
               parseScale={exercise.function}
               options={exercise.options || {}}
             />
           ))}
+        <AutoScroller />
       </main>
-
-      <footer>
-        <a
-          href="https://github.com/Digald"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Created by Mark Alaniz
-        </a>
-      </footer>
     </div>
   );
 };

@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
+import { debounce } from "lodash";
 import { keyMaps } from "./data/majorPositions";
 import { Options } from "./utils/types";
 
@@ -14,7 +15,6 @@ interface ScaleProps {
   options: Options;
   scaleKey: string;
   scaleName: string;
-  scaleType: string;
 }
 
 const Scale = ({
@@ -23,9 +23,12 @@ const Scale = ({
   options,
   scaleKey,
   scaleName,
-  scaleType,
 }: ScaleProps) => {
   const [vextab, setVextab] = useState<VexState>(null);
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
 
   const data = parseScale(scaleKey, keyMaps, options);
 
@@ -56,7 +59,23 @@ const Scale = ({
       tab.parse(data);
       artist.render(renderer);
     }
-  }, [vextab, id, data]);
+  }, [vextab, id, data, windowSize]);
+
+  useEffect(() => {
+    const handleResize = debounce(() => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }, 200); // Adjust debounce time as needed
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <div className="vexbox mt-12">

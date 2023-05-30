@@ -13,7 +13,7 @@ function Button({
   exerciseList,
 }: ButtonProps) {
   const [isActive, setIsActive] = useState(false);
-  const backgroundStyle = isActive ? "bg-teal-700" : "";
+  const backgroundStyle = isActive ? "bg-[#80D0C7]" : "";
 
   useEffect(() => {
     setIsActive(

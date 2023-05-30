@@ -10,7 +10,6 @@ import {
   ascAndDescFourNoteCoils,
   alternatingFourNoteCoils,
   singleString,
-  twoString,
 } from "../utils/exercises";
 import {
   scaleToneAscOrDesc,
@@ -82,11 +81,6 @@ export const buttonList: ButtonListItem[] = [
   {
     name: "Single String",
     function: singleString,
-    options: {},
-  },
-  {
-    name: "Two String",
-    function: twoString,
     options: {},
   },
   {
